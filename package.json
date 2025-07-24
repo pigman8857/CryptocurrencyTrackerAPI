@@ -19,7 +19,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "build:image" : "docker build -t crypto-track-api:ver1 .",
-    "start:temp:image": "docker run --rm --name crypto-api -p 3000:3000 crypto-track-api:ver1"
+    "start:temp:image": "docker run --rm --name crypto-api -p 3001:3001 crypto-track-api:ver1"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
