@@ -1,6 +1,9 @@
 # Use Node.js as the base image
 FROM node:22-alpine
 
+ARG NODE_ENV=development
+ENV NODE_ENV=$NODE_ENV
+
 # Set working directory
 WORKDIR /usr/src/app
 
@@ -18,4 +21,4 @@ RUN npm run build
 EXPOSE 3001
 
 # Start the application
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "run", "start:dev"]
