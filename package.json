@@ -18,15 +18,18 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "build:image" : "docker build -t crypto-track-api:ver1 .",
+    "build:image": "docker build -t crypto-track-api:ver1 .",
     "start:temp:image": "docker run --rm --name crypto-api -p 3001:3001 crypto-track-api:ver1"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
+    "mysql2": "^3.14.2",
     "reflect-metadata": "^0.2.0",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "typeorm": "^0.3.25"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
