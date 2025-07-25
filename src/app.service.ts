@@ -1,16 +1,10 @@
-import { Injectable,Inject } from '@nestjs/common';
-import { TestTable } from './test.entity';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
+import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
 
-  constructor( @Inject('TEST_REPOSITORY')private repo: Repository<TestTable>){}
+  constructor() {}
   getHello(): string {
     return 'Hello World!';
   }
 
-  async getTestData(id: number) : Promise<TestTable>{
-    return this.repo.findOneBy({id}) 
-  }
 }

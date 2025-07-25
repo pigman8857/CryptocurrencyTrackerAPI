@@ -10,9 +10,4 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
-
-  @Get('/testdata/:id')
-  async getTestData(@Param('id' )id: number): Promise<TestTable> {
-    return await this.appService.getTestData(id);
-  }
 }
