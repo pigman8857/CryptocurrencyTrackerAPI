@@ -20,7 +20,7 @@ export class DatabaseConfigService implements TypeOrmOptionsFactory {
       entities: [__dirname + '/../**/*.entity{.ts,.js}'],
       synchronize: this.configService.get<boolean>('SYNCHRONIZE'), // production-safe default
     };
-    console.log('Database configs > ',config)
+
     return config;
   }
 }
