@@ -14,6 +14,11 @@ describe('AppController', () => {
     appController = app.get<AppController>(AppController);
   });
 
+  afterEach(() => {
+    jest.resetAllMocks(); // resets all mock implementations and call history
+  });
+
+
   describe('root', () => {
     it('should return "Hello World!"', () => {
       expect(appController.getHello()).toBe('Hello World!');
