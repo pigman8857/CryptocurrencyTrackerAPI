@@ -18,15 +18,21 @@ export class UserController {
     @Post('/signup')
     async createUser(@Body()body : CreateUserDTO, @Session()session: any): Promise<User> {
         const user = await this.authService.signUp(body.email,body.password);
-        //session.userID = user.id;
+        session.userID = user.id;
         return user;
     }
 
     @Post('/signin')
     async signIn(@Body()body : SignInDTO, @Session()session: any): Promise<User> {
         const user = await this.authService.signIn(body.email,body.password);
-        //session.userID = user.id;
+        session.userID = user.id;
         return user;
+    }
+
+    @Post('signOut')
+    signOut(@Session()session: any){
+        console.log('signOut');
+        session.userID = null;
     }
 
 }
