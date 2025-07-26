@@ -4,14 +4,14 @@ import { User } from 'src/user/entities/user.entity';
 import { CreateUserDTO } from './dtos/create-user.dto';
 import { AuthService } from './auth/auth.service';
 import { UserDTO } from './dtos/user.dto';
-import { Serialize } from 'src/interceptors/serialize/serialize.interceptor';
+import { Serialize } from '../interceptors/serialize/serialize.interceptor';
 
 @Controller('user')
 @Serialize(UserDTO)
 export class UserController {
     constructor(
        private readonly userService: UserService,
-       private authService: AuthService
+       private readonly authService: AuthService
     ) {}
 
     @Post('/signup')
