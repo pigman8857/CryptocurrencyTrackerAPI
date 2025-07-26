@@ -24,6 +24,10 @@ describe('UserController', () => {
 
     controller = module.get<UserController>(UserController);
   });
+  
+  afterEach(() => {
+    jest.resetAllMocks(); // resets all mock implementations and call history
+  });
 
   it('should be defined', () => {
     expect(controller).toBeDefined();

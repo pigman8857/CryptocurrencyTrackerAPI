@@ -40,6 +40,10 @@ describe('AuthService', () => {
     service = module.get<AuthService>(AuthService);
   });
 
+  afterAll(() => {
+    jest.resetAllMocks();
+  })
+
   it('should be defined', () => {
     expect(service).toBeDefined();
   });

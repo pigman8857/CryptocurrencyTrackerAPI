@@ -8,6 +8,11 @@ describe('SerializeInterceptor', () => {
 
   describe('Test UserDTO ',() => {
 
+    afterEach(() => {
+      jest.resetAllMocks(); // resets all mock implementations and call history
+    });
+
+
     const mockUser = {
       id: 1,
       email: 'user@example.com',

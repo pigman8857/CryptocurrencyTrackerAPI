@@ -5,6 +5,7 @@ import { CreateUserDTO } from './dtos/create-user.dto';
 import { AuthService } from './auth/auth.service';
 import { UserDTO } from './dtos/user.dto';
 import { Serialize } from '../interceptors/serialize/serialize.interceptor';
+import { SignInDTO } from './dtos/signin-user.dto';
 
 @Controller('user')
 @Serialize(UserDTO)
@@ -16,8 +17,14 @@ export class UserController {
 
     @Post('/signup')
     async createUser(@Body()body : CreateUserDTO, @Session()session: any): Promise<User> {
-        console.log('signup body',body);
         const user = await this.authService.signUp(body.email,body.password);
+        //session.userID = user.id;
+        return user;
+    }
+
+    @Post('/signin')
+    async signIn(@Body()body : SignInDTO, @Session()session: any): Promise<User> {
+        const user = await this.authService.signIn(body.email,body.password);
         //session.userID = user.id;
         return user;
     }
