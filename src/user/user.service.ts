@@ -10,6 +10,13 @@ export class UserService {
     private readonly userRepo: Repository<User>,
   ) {}
 
+  findOne(id: number) {
+    if(!id){
+        return null;
+    }
+    return this.userRepo.findOneBy({id});
+  }
+
   async create(email: string, password: string): Promise<User>{
     const user = await this.userRepo.create({ email,password});
     
