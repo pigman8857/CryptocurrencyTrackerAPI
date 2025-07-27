@@ -7,6 +7,7 @@ import { UserDTO } from './dtos/user.dto';
 import { Serialize } from '../interceptors/serialize/serialize.interceptor';
 import { SignInDTO } from './dtos/signin-user.dto';
 import { CurrentUser } from '../decorators/current-user/current-user.decorator'
+import { AuthDataGuard } from 'src/guards/auth-data/auth-data.guard';
 
 
 @Controller('user')
@@ -23,6 +24,7 @@ export class UserController {
     }
 
     @Post('/signup')
+    @UseGuards(AuthDataGuard)
     async createUser(@Body()body : CreateUserDTO, @Session()session: any): Promise<User> {
         const user = await this.authService.signUp(body.email,body.password);
         session.userID = user.id;
@@ -30,6 +32,7 @@ export class UserController {
     }
 
     @Post('/signin')
+    @UseGuards(AuthDataGuard)
     async signIn(@Body()body : SignInDTO, @Session()session: any): Promise<User> {
         const user = await this.authService.signIn(body.email,body.password);
         session.userID = user.id;
@@ -38,7 +41,6 @@ export class UserController {
 
     @Post('signOut')
     signOut(@Session()session: any){
-        console.log('signOut');
         session.userID = null;
     }
 
