@@ -9,9 +9,10 @@ import { TransactionHistoryService } from './transaction-history/transaction-his
 import { Serialize } from 'src/interceptors/serialize/serialize.interceptor';
 import { TransactionHistoryDTO } from './transaction-history/dto/transaction-history.dto';
 import { TransactionHistory } from './transaction-history/entities/transaction-history.entity';
+import { CryptoDTO } from './dto/crypto.dto';
+import { Crypto } from './entities/crypto.entity';
 
 @Controller('crypto')
-@Serialize(TransactionHistoryDTO)
 export class CryptoController {
   constructor(
     private readonly cryptoService: CryptoService, 
@@ -21,22 +22,30 @@ export class CryptoController {
 
   @Post('act/:cryptoId')
   @UseGuards(AuthGuard)
-  async action(@Param() cryptoId: number,@Body() actCryptoDto: ActCryptoDto, @CurrentUser() user: User): Promise<TransactionHistory> {
+  @Serialize(TransactionHistoryDTO)
+  async action(
+    @Param() cryptoId: number,
+    @Body() actCryptoDto: ActCryptoDto, 
+    @CurrentUser() user: User)
+    : Promise<TransactionHistory> {
     return await this.transHistService.create(actCryptoDto,user);
   }
 
   @Post()
-  async create(@Body() createCryptoDto: CreateCryptoDto) {
+  @Serialize(CryptoDTO)
+  async create(@Body() createCryptoDto: CreateCryptoDto): Promise<Crypto> {
     return await this.cryptoService.create(createCryptoDto);
   }
 
   @Get()
-  async findAll() {
+  @Serialize(CryptoDTO)
+  async findAll(): Promise<Crypto[]>{
     return await this.cryptoService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  @Serialize(CryptoDTO)
+  async findOne(@Param('id') id: string): Promise<Crypto>  {
     return await this.cryptoService.findOne(+id);
   }
 
@@ -46,7 +55,7 @@ export class CryptoController {
   // }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string): Promise<Crypto> {
     return await this.cryptoService.remove(+id);
   }
 }

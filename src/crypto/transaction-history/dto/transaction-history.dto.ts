@@ -1,7 +1,7 @@
 import { Expose,Type } from "class-transformer";
 import { TransactionType } from "../entities/transaction-history.entity";
-import { Crypto } from "src/crypto/entities/crypto.entity";
-import { UserDTO } from "src/user/dtos/user.dto";
+import { UserDTO } from "src/user/dto/user.dto";
+import { CryptoDTO } from "src/crypto/dto/crypto.dto";
 
 export class TransactionHistoryDTO {
     @Expose()
@@ -11,13 +11,17 @@ export class TransactionHistoryDTO {
     Amount: number;
 
     @Expose()
+    PriceAt: number;
+
+    @Expose()
     PriceTimeDate: Date;
 
     @Expose()
     transactionType: TransactionType;
 
     @Expose()
-    crypto: Crypto;
+    @Type(() => CryptoDTO)// This tells class-transformer to apply CryptoDTO transformation
+    crypto: CryptoDTO;
 
     @Expose()
     @Type(() => UserDTO) // This tells class-transformer to apply UserDTO transformation
