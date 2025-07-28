@@ -4,10 +4,10 @@ import { User } from 'src/user/entities/user.entity';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { AuthService } from './auth/auth.service';
 import { UserDTO } from './dto/user.dto';
-import { Serialize } from '../interceptors/serialize/serialize.interceptor';
+import { Serialize } from '@src/interceptors/serialize/serialize.interceptor';
 import { SignInDTO } from './dto/signin-user.dto';
-import { CurrentUser } from '../decorators/current-user/current-user.decorator'
-import { AuthDataGuard } from '../guards/auth-data/auth-data.guard';
+import { CurrentUser } from '@src/decorators/current-user/current-user.decorator'
+import { AuthDataGuard } from '@src/guards/auth-data/auth-data.guard';
 
 
 @Controller('user')

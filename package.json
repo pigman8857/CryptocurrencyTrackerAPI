@@ -87,10 +87,16 @@
       "!src/**/*.e2e-spec.ts"
     ],
     "coveragePathIgnorePatterns": [
-    "/node_modules/",
-    "/dist/",
-    "/test/"
+      "/node_modules/",
+      "/dist/",
+      "/test/"
     ],
+    "moduleNameMapper": {
+      "^@src/(.*)$": "<rootDir>/src/$1",
+      "^@user/(.*)$": "<rootDir>/src/user/$1",
+      "^@crypto/(.*)$": "<rootDir>/src/crypto/$1",
+      "^@crypto/transaction-history/(.*)$": "<rootDir>/src/crypto/transaction-history/$1"
+    },
     "coverageDirectory": "./coverage",
     "testEnvironment": "node"
   }

@@ -2,11 +2,11 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { CryptoService } from './crypto.service';
 import { CreateCryptoDto } from './dto/create-crypto.dto';
 import { ActCryptoDto } from './dto/act-crypto.dto';
-import { AuthGuard } from 'src/guards/auth/auth.guard';
+import { AuthGuard } from '@src/guards/auth/auth.guard';
 import { CurrentUser } from 'src/decorators/current-user/current-user.decorator';
-import { User } from 'src/user/entities/user.entity';
+import { User } from '@user/entities/user.entity';
 import { TransactionHistoryService } from './transaction-history/transaction-history.service';
-import { Serialize } from 'src/interceptors/serialize/serialize.interceptor';
+import { Serialize } from '@src/interceptors/serialize/serialize.interceptor';
 import { TransactionHistoryDTO } from './transaction-history/dto/transaction-history.dto';
 import { TransactionHistory } from './transaction-history/entities/transaction-history.entity';
 import { CryptoDTO } from './dto/crypto.dto';

@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TransactionHistoryService } from './transaction-history.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { User } from '../../user/entities/user.entity';
-import { Crypto } from '../entities/crypto.entity';
+import { User } from '@user/entities/user.entity';
+import { Crypto } from '@crypto/entities/crypto.entity';
 import { TransactionHistory } from './entities/transaction-history.entity';
 
 describe('TransactionHistoryService', () => {

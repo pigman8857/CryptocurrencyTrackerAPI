@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { TransactionHistory } from './entities/transaction-history.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../../user/entities/user.entity';
-import { ActCryptoDto } from '../dto/act-crypto.dto';
+import { User } from '@user/entities/user.entity';
+import { ActCryptoDto } from '@crypto/dto/act-crypto.dto';
 
 
 @Injectable()

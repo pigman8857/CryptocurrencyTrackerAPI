@@ -1,6 +1,6 @@
 import { CurrentUserMiddleware } from './current-user.middleware';
-import { UserService } from 'src/user/user.service';
-import { User } from 'src/user/entities/user.entity';
+import { UserService } from '@user/user.service';
+import { User } from '@user/entities/user.entity';
 const { fn ,mock, spyOn} = jest
 describe('CurrentUserMiddleware', () => {
   let userService: UserService;
