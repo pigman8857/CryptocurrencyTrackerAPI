@@ -7,7 +7,7 @@ import { UserDTO } from './dtos/user.dto';
 import { Serialize } from '../interceptors/serialize/serialize.interceptor';
 import { SignInDTO } from './dtos/signin-user.dto';
 import { CurrentUser } from '../decorators/current-user/current-user.decorator'
-import { AuthDataGuard } from 'src/guards/auth-data/auth-data.guard';
+import { AuthDataGuard } from '../guards/auth-data/auth-data.guard';
 
 
 @Controller('user')

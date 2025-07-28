@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserController } from './user.controller';
 import { AuthService } from './auth/auth.service';
 import { CurrentUserMiddleware } from 'src/middlewares/current-user/current-user.middleware';
-import { TransactionHistory } from 'src/crypto/entities/transaction-history.entity';
+import { TransactionHistory } from 'src/crypto/transaction-history/entities/transaction-history.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User,TransactionHistory])],

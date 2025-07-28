@@ -6,7 +6,7 @@ import {
   PrimaryColumn
 } from 'typeorm';
 
-import { TransactionHistory } from './transaction-history.entity';
+import { TransactionHistory } from '../transaction-history/entities/transaction-history.entity';
 
 @Entity()
 export class Crypto {

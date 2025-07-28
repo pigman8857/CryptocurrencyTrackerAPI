@@ -1,5 +1,5 @@
 import { Column,Entity,PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Crypto } from './crypto.entity';
+import { Crypto } from '../../entities/crypto.entity';
 import { User } from 'src/user/entities/user.entity';
 
 export type TransactionType = 'buy' | 'sell';

@@ -1,4 +1,4 @@
-import { TransactionHistory } from 'src/crypto/entities/transaction-history.entity';
+import { TransactionHistory } from '../../crypto/transaction-history/entities/transaction-history.entity';
 import {
   Entity,
   Column,
