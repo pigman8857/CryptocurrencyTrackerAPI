@@ -4,12 +4,14 @@ import { Observable, of, lastValueFrom } from 'rxjs';
 import { UserDTO } from '../../user/dto/user.dto';
 import { plainToClass } from 'class-transformer';
 
+const {resetAllMocks} = jest;
+
 describe('SerializeInterceptor', () => {
 
   describe('Test UserDTO ',() => {
 
-    afterEach(() => {
-      jest.resetAllMocks(); // resets all mock implementations and call history
+    afterAll(() => {
+      resetAllMocks(); // resets all mock implementations and call history
     });
 
 

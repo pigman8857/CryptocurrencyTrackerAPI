@@ -10,8 +10,8 @@ export class CryptoService {
   constructor(@InjectRepository(Crypto)private cryptoRepo: Repository<Crypto>){}
 
   async create(createCryptoDto: CreateCryptoDto): Promise<Crypto> {
-    const cryptoToBeDeleted = await this.findOne(createCryptoDto.id);
-    if(cryptoToBeDeleted){
+    const existingCrypto = await this.findOne(createCryptoDto.id);
+    if(existingCrypto){
         throw new BadRequestException('The crypto already exist');
     }
     const createdCrypto = this.cryptoRepo.create({id: createCryptoDto.id,name: createCryptoDto.name });
@@ -42,8 +42,11 @@ export class CryptoService {
     return await this.cryptoRepo.update(cryptoId,{name: updateCryptoDto.name});
   }
 
-  async remove(id: number) {
-    const cryptoToBeDeleted = await this.findOne(id);
+  async remove(cryptoId: number) {
+    if(!cryptoId){
+        return null;
+    }
+    const cryptoToBeDeleted = await this.findOne(cryptoId);
     if(!cryptoToBeDeleted){
         throw new BadRequestException('The crypto not found');
     }
