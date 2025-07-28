@@ -15,22 +15,22 @@ export class TransactionHistoryService {
   ){}
   
 
-  async makeAction(actCrytoDto: ActCryptoDto, user: User) {
+  async create(actCrytoDto: ActCryptoDto, user: User) {
     const createdHistory = await this.transHistRepo.create({
       PriceTimeDate: actCrytoDto.buyTime,
       PriceAt: actCrytoDto.priceAt,
-      Amount: actCrytoDto.amount
+      Amount: actCrytoDto.amount,
+      transactionType: actCrytoDto.transactionType
     })
-
+    
     createdHistory.user = user;
 
     //@ts-ignore
     createdHistory.crypto = {
       id:actCrytoDto.crypto.id,
       name: actCrytoDto.crypto.name,
-      //transactionHistories : createdHistory
-    }
+    } 
 
-    await this.transHistRepo.save(createdHistory)
+    return await this.transHistRepo.save(createdHistory)
   }
 }
