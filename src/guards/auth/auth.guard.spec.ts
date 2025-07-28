@@ -1,6 +1,6 @@
 import { ExecutionContext } from '@nestjs/common';
 import { AuthGuard } from './auth.guard';
-const { fn }= jest
+const { fn } = jest
 describe('AuthGuard', () => {
   let guard: AuthGuard;
 

@@ -5,7 +5,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BadRequestException } from '@nestjs/common';
 
-const { spyOn, mock, resetAllMocks, fn} = jest;
+const { spyOn, resetAllMocks, fn} = jest;
 
 describe('CryptoService', () => {
   let service: CryptoService;
@@ -116,23 +116,3 @@ describe('CryptoService', () => {
     });
   });
 });
-
-
-// import { Test, TestingModule } from '@nestjs/testing';
-// import { CryptoService } from './crypto.service';
-
-// describe('CryptoService', () => {
-//   let service: CryptoService;
-
-//   beforeEach(async () => {
-//     const module: TestingModule = await Test.createTestingModule({
-//       providers: [CryptoService],
-//     }).compile();
-
-//     service = module.get<CryptoService>(CryptoService);
-//   });
-
-//   it('should be defined', () => {
-//     expect(service).toBeDefined();
-//   });
-// });
