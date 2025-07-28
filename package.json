@@ -25,6 +25,7 @@
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^10.0.0",
+    "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/typeorm": "^11.0.0",
     "bcrypt": "^6.0.0",
@@ -65,16 +66,40 @@
       "js",
       "json",
       "ts"
+    ],    
+    "modulePaths": [
+      "<rootDir>"
     ],
-    "rootDir": "src",
+    "rootDir": "./",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "**/*.(t|j)s",
+      "src/**/*.ts",
+      "!src/**/*.module.ts",
+      "!src/**/*.entity.ts",
+      "!src/**/*.dto.ts",
+      "!src/main.ts",
+      "!src/**/settings.ts",
+      "!src/**/*.config.ts",
+      "!src/**/*.e2e-spec.ts"
     ],
-    "coverageDirectory": "../coverage",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/",
+      "/test/",
+      "/coverage/",
+      "eslintrc.js"
+    ],
+    "moduleNameMapper": {
+      "^@src/(.*)$": "<rootDir>/src/$1",
+      "^@user/(.*)$": "<rootDir>/src/user/$1",
+      "^@crypto/(.*)$": "<rootDir>/src/crypto/$1",
+      "^@crypto/transaction-history/(.*)$": "<rootDir>/src/crypto/transaction-history/$1"
+    },
+    "coverageDirectory": "./coverage",
     "testEnvironment": "node"
   }
 }

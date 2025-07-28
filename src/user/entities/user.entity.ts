@@ -1,3 +1,4 @@
+import { TransactionHistory } from '@crypto/transaction-history/entities/transaction-history.entity';
 import {
   Entity,
   Column,
@@ -5,6 +6,7 @@ import {
   AfterInsert,
   AfterRemove,
   AfterUpdate,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -17,6 +19,10 @@ export class User {
 
   @Column()
   password: string;
+  
+
+  @OneToMany(() => TransactionHistory, (transaction) => transaction.user)
+  transactionHistories: TransactionHistory[];
 
   @AfterInsert()
   logInsert() {

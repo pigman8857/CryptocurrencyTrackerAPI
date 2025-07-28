@@ -1,12 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
-import { UserService } from '../user.service';
+import { UserService } from '@user/user.service';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { PasswordHasher } from '../../library_wrappers/passwordHasher';
-import { User } from '../entities/user.entity';
+import { PasswordHasher } from '@src/library_wrappers/passwordHasher';
+import { User } from '@user/entities/user.entity';
 
 // Mock dependencies
-jest.mock('../../library_wrappers/passwordHasher');
+jest.mock('@src/library_wrappers/passwordHasher');
 
 describe('AuthService', () => {
   let service: AuthService;

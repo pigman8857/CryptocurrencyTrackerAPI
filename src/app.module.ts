@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseConfigService } from './config/database.config';
 import { UserModule } from './user/user.module';
+import { CryptoModule } from './crypto/crypto.module';
 
 const cookieSession = require('cookie-session');
 
@@ -18,6 +19,7 @@ const cookieSession = require('cookie-session');
       useClass: DatabaseConfigService,
     }),
     UserModule,
+    CryptoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
