@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException,BadRequestException } from '@nestjs/common';
 import { CreateCryptoDto } from './dto/create-crypto.dto';
-import { ActCryptoDto } from './dto/act-crypto.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Crypto } from './entities/crypto.entity';
+import { UpdateCryptoDto } from './dto/update-crypto.dto';
 
 @Injectable()
 export class CryptoService {
@@ -28,6 +28,18 @@ export class CryptoService {
     }
 
     return await this.cryptoRepo.findOne({where:{id}});
+  }
+
+  async update(cryptoId: number, updateCryptoDto: UpdateCryptoDto){
+    if(!cryptoId){
+        return null;
+    }
+    const cryptoToBeUpdated= await this.findOne(cryptoId);
+    if(!cryptoToBeUpdated){
+        throw new BadRequestException('The crypto not found');
+    }
+
+    return await this.cryptoRepo.update(cryptoId,{name: updateCryptoDto.name});
   }
 
   async remove(id: number) {

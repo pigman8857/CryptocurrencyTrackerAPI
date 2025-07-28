@@ -11,6 +11,7 @@ import { TransactionHistoryDTO } from './transaction-history/dto/transaction-his
 import { TransactionHistory } from './transaction-history/entities/transaction-history.entity';
 import { CryptoDTO } from './dto/crypto.dto';
 import { Crypto } from './entities/crypto.entity';
+import { UpdateCryptoDto } from './dto/update-crypto.dto';
 
 @Controller('crypto')
 export class CryptoController {
@@ -49,10 +50,10 @@ export class CryptoController {
     return await this.cryptoService.findOne(+id);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateCryptoDto: UpdateCryptoDto) {
-  //   return this.cryptoService.update(+id, updateCryptoDto);
-  // }
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateCryptoDto: UpdateCryptoDto) {
+    return this.cryptoService.update(+id, updateCryptoDto);
+  }
 
   @Delete(':id')
   async remove(@Param('id') id: string): Promise<Crypto> {
