@@ -89,7 +89,9 @@
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/dist/",
-      "/test/"
+      "/test/",
+      "/coverage/",
+      "eslintrc.js"
     ],
     "moduleNameMapper": {
       "^@src/(.*)$": "<rootDir>/src/$1",
