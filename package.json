@@ -91,7 +91,7 @@
     "/dist/",
     "/test/"
     ],
-    "coverageDirectory": "../coverage",
+    "coverageDirectory": "./coverage",
     "testEnvironment": "node"
   }
 }
