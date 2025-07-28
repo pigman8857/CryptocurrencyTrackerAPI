@@ -2,14 +2,15 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  OneToMany
+  OneToMany,
+  PrimaryColumn
 } from 'typeorm';
 
 import { TransactionHistory } from './transaction-history.entity';
 
 @Entity()
 export class Crypto {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: number;
 
   @Column()

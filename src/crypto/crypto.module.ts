@@ -4,6 +4,7 @@ import { CryptoController } from './crypto.controller';
 import { User } from 'src/user/entities/user.entity';
 import { TransactionHistory } from './entities/transaction-history.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Crypto } from './entities/crypto.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Crypto,TransactionHistory,User])],

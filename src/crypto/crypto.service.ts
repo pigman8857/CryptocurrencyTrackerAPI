@@ -1,26 +1,41 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException,BadRequestException } from '@nestjs/common';
 import { CreateCryptoDto } from './dto/create-crypto.dto';
-import { UpdateCryptoDto } from './dto/update-crypto.dto';
+import { PurchaseCryptoDto } from './dto/puchase-crypto.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Crypto } from './entities/crypto.entity';
 
 @Injectable()
 export class CryptoService {
-  create(createCryptoDto: CreateCryptoDto) {
-    return 'This action adds a new crypto';
+  constructor(@InjectRepository(Crypto)private cryptoRepo: Repository<Crypto>){}
+
+  async create(createCryptoDto: CreateCryptoDto): Promise<Crypto> {
+    const cryptoToBeDeleted = await this.findOne(createCryptoDto.id);
+    if(cryptoToBeDeleted){
+        throw new BadRequestException('The crypto already exist');
+    }
+    const createdCrypto = this.cryptoRepo.create({id: createCryptoDto.id,name: createCryptoDto.name });
+    return await this.cryptoRepo.save(createdCrypto);
   }
 
-  findAll() {
-    return `This action returns all crypto`;
+  async findAll(): Promise<Crypto[]> {
+    return await this.cryptoRepo.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} crypto`;
+  async findOne(id: number): Promise<Crypto> {
+    if(!id){
+        return null;
+    }
+
+    return await this.cryptoRepo.findOne({where:{id}});
   }
 
-  update(id: number, updateCryptoDto: UpdateCryptoDto) {
-    return `This action updates a #${id} crypto`;
-  }
+  async remove(id: number) {
+    const cryptoToBeDeleted = await this.findOne(id);
+    if(!cryptoToBeDeleted){
+        throw new BadRequestException('The crypto not found');
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} crypto`;
+    return this.cryptoRepo.remove(cryptoToBeDeleted);
   }
 }

@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { CryptoService } from './crypto.service';
 import { CreateCryptoDto } from './dto/create-crypto.dto';
-import { UpdateCryptoDto } from './dto/update-crypto.dto';
+import { PurchaseCryptoDto } from './dto/puchase-crypto.dto';
 
 @Controller('crypto')
 export class CryptoController {
@@ -22,10 +22,10 @@ export class CryptoController {
     return this.cryptoService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCryptoDto: UpdateCryptoDto) {
-    return this.cryptoService.update(+id, updateCryptoDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateCryptoDto: UpdateCryptoDto) {
+  //   return this.cryptoService.update(+id, updateCryptoDto);
+  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
