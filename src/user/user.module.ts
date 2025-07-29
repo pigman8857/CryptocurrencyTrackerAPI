@@ -10,7 +10,8 @@ import { Portfolio } from '@portfolio/entities/portfolio.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([User,Portfolio])],
   providers: [UserService, AuthService],
-  controllers: [UserController]
+  controllers: [UserController],
+  exports: [UserService], // 👈 Export for crypto module to use so that current-user.middleware that is also used by crypto module can use it.
 })
 export class UserModule {
     configure(consumer: MiddlewareConsumer){

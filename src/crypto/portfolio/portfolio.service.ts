@@ -12,6 +12,13 @@ export class PortfolioService {
     @InjectRepository(Portfolio)private portfolioRepo: Repository<Portfolio>
   ){}
   
+  async findOne(id: number): Promise<Portfolio>{
+    if(!id){
+      return null;
+    }
+
+    return this.portfolioRepo.findOne({where: {id}});
+  }
 
   async create(purchaseCryptoDto: CreatePortfolioDto, user: User) {
     const createdHistory = await this.portfolioRepo.create({
@@ -29,5 +36,9 @@ export class PortfolioService {
     } 
 
     return await this.portfolioRepo.save(createdHistory)
+  }
+  
+  async update(portfolioId: number,purchaseCryptoDto: CreatePortfolioDto, user: User){
+
   }
 }
