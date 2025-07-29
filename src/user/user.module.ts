@@ -15,6 +15,6 @@ import { Portfolio } from '@portfolio/entities/portfolio.entity';
 })
 export class UserModule {
     configure(consumer: MiddlewareConsumer){
-    consumer.apply(CurrentUserMiddleware).forRoutes('*');
+    consumer.apply(CurrentUserMiddleware).forRoutes(UserController);
   }
 }

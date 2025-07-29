@@ -19,17 +19,12 @@ export class CryptoController {
     return await this.cryptoService.create(createCryptoDto);
   }
 
-  @Get()
+  @Get('/all')
   @Serialize(CryptoDTO)
   async findAll(): Promise<Crypto[]>{
     return await this.cryptoService.findAll();
   }
 
-  @Get(':id')
-  @Serialize(CryptoDTO)
-  async findOne(@Param('id') id: string): Promise<Crypto>  {
-    return await this.cryptoService.findOne(+id);
-  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCryptoDto: UpdateCryptoDto) {
@@ -39,5 +34,11 @@ export class CryptoController {
   @Delete(':id')
   async remove(@Param('id') id: string): Promise<Crypto> {
     return await this.cryptoService.remove(+id);
+  }
+
+  @Get(':id')
+  @Serialize(CryptoDTO)
+  async findOne(@Param('id') id: string): Promise<Crypto>  {
+    return await this.cryptoService.findOne(+id);
   }
 }

@@ -19,8 +19,8 @@ describe('GetPortfolioMiddleware', () => {
     expect(middleware).toBeDefined();
   });
 
-  it('should do nothing if userID is not in session', async () => {
-    const req: any = { body: {} };
+  it('should do nothing if id is not in params', async () => {
+    const req: any = { params: {} };
     const res: any = {};
     const next = fn();
 
@@ -31,7 +31,7 @@ describe('GetPortfolioMiddleware', () => {
     expect(next).toHaveBeenCalled();
   });
 
-  it('should assign portfolio if portfolio id is presented ', async () => {
+  it('should assign portfolio if portfolio id param is presented ', async () => {
     //@ts-ignore
     const fakePortfolio: Portfolio = {
       id: 1,
@@ -41,7 +41,7 @@ describe('GetPortfolioMiddleware', () => {
 
     spyOn(portfolioService,"findOne").mockResolvedValue(fakePortfolio);
 
-    const req: any = { body: { id: 1} };
+    const req: any = { params: { "0": "1"} };
     const res: any = {};
     const next = fn();
 

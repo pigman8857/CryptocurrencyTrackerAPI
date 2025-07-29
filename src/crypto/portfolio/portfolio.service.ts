@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Portfolio } from './entities/portfolio.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -19,6 +19,31 @@ export class PortfolioService {
     }
 
     return this.portfolioRepo.findOne({where: {id}});
+  }
+
+  async findOneBelongsToUser(user: User,id: number): Promise<Portfolio>{
+    if(!id || !user || !user.id){
+      return null;
+    }
+
+    return this.portfolioRepo.findOne(
+      {where: {
+        id , 
+        user: { 
+          id: user.id
+        }},
+      relations:['crypto','user']});
+  }
+
+  async findAll(userId: number): Promise<Portfolio[]>{
+    if(!userId){
+      return null;
+    }
+
+    return await this.portfolioRepo.find({
+      relations: ['crypto'],
+      where: { user : { id:userId }},
+    })
   }
 
   async create(createPortfolioDto: CreatePortfolioDto, user: User) {
@@ -54,4 +79,18 @@ export class PortfolioService {
 
     return await this.portfolioRepo.update(id,portfolioToUpdate) 
   }
+
+  async remove(id: number): Promise<Portfolio>{
+    if(!id){
+      return null;
+    }
+
+    const portfoliotoBeDeleted = await this.findOne(id);
+    if(!portfoliotoBeDeleted){
+        throw new BadRequestException('The portfolio not found');
+    }
+
+     return await this.portfolioRepo.remove(portfoliotoBeDeleted) 
+  }
+
 }

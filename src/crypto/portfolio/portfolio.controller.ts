@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@src/guards/auth.guard';
 import { PortfolioDTO } from './dto/portfolio.dto';
 import { Serialize } from '@src/interceptors/serialize.interceptor';
@@ -12,13 +12,20 @@ import { CheckPortfolioGuard } from './guards/check-portfolio.guard';
 import { UpdateResult } from 'typeorm';
 
 @Controller('crypto/portfolio')
+@UseGuards(AuthGuard)
 export class PortfolioController {
   constructor(
     private readonly portfolioService: PortfolioService
   ) {}
 
+
+  @Get('/all')
+  @Serialize(PortfolioDTO)
+  async findAll(@CurrentUser() user: User){
+    return await this.portfolioService.findAll(user.id);
+  }
+
   @Post()
-  @UseGuards(AuthGuard)
   @Serialize(PortfolioDTO)
   async create(
     @Body() createPortfolioDto: CreatePortfolioDto, 
@@ -27,15 +34,31 @@ export class PortfolioController {
     return await this.portfolioService.create(createPortfolioDto,user);
   }
 
+  @Get('/:id')
+  @Serialize(PortfolioDTO)
+  async findOne(@Param('id') id:number,@CurrentUser() user: User){
+     return await this.portfolioService.findOneBelongsToUser(user, id);
+  }
+
+
   @Patch('/:id')
-  @UseGuards(AuthGuard,CheckPortfolioGuard)
+  @UseGuards(CheckPortfolioGuard)
   @Serialize(PortfolioDTO)
   async update(
     @Param('id') id: number,
     @Body() updatePortfolioDto: UpdatePortfolioDto, 
     @CurrentUser() user: User)
     : Promise<UpdateResult> {
-    console.log('id,',id);
     return await this.portfolioService.update(id,updatePortfolioDto,user);
   }
+
+
+  @Delete('/:id')
+  async delete(
+    @Param('id') id: number, 
+    @CurrentUser() user: User)
+    : Promise<Portfolio> {
+    return await this.portfolioService.remove(id);
+  }
+
 }

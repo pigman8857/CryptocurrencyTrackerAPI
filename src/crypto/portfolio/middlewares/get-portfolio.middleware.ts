@@ -6,11 +6,12 @@ import { Request,Response, NextFunction} from 'express';
 export class GetPortfolioMiddleware implements NestMiddleware {
   constructor(private portfolioService: PortfolioService){}
   async use(req: Request, res: Response, next: NextFunction) {    
-    const {id: portfolioId} = req.body as {id: number}
-    if(portfolioId) {
-        const portfolio =  await this.portfolioService.findOne(portfolioId)  
+    const id = +req.params[0] as number
+    if(id) {
+        const portfolio =  await this.portfolioService.findOne(id)  
         req.portfolio = portfolio;
     }
+
     next();
   }
 }

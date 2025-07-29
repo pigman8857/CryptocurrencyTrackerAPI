@@ -19,7 +19,9 @@ import { UserModule } from '@src/user/user.module';
 })
 export class CryptoModule {
   configure(consumer: MiddlewareConsumer){
-    consumer.apply(CurrentUserMiddleware).forRoutes(CryptoController, PortfolioController);
+    consumer
+      .apply(CurrentUserMiddleware)
+      .forRoutes(CryptoController, PortfolioController);
     consumer
       .apply(GetPortfolioMiddleware)
       .forRoutes({ path: 'crypto/portfolio/*', method: RequestMethod.PATCH })

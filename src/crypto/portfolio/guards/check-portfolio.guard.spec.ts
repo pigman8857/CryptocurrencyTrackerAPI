@@ -10,12 +10,13 @@ describe('CheckPortfolioGuard', () => {
     guard = new CheckPortfolioGuard();
   });
 
-  const createMockContext = ({portfolio, id}: {portfolio?:Portfolio; id?: number }): ExecutionContext => {
+  const createMockContext = ({portfolio, body}: {portfolio?:Portfolio; body?: {id : number} }): ExecutionContext => {
     return {
       switchToHttp: () => ({
         getRequest: () => ({  
           portfolio,
-          params: { id } }),
+          body
+        }),
       }),
     } as unknown as ExecutionContext;
   };
@@ -25,7 +26,7 @@ describe('CheckPortfolioGuard', () => {
     expect(guard).toBeDefined();
   });
 
-  it('should return true if portfolio is present and portfolio id in param match', async () => {
+  it('should return true if portfolio is present and portfolio id in body match', async () => {
     const mockContext = createMockContext(
       { 
         //@ts-ignore
@@ -35,14 +36,14 @@ describe('CheckPortfolioGuard', () => {
           Amount: 1, 
           DateOfPurchase: new Date() 
         }, 
-        id:1
+        body: { id : 1 }
       }
     );
     await expect(guard.canActivate(mockContext)).toBe(true);
   });
 
   it('should throw NotFoundException if portfolio is missing', async () => {
-    const mockContext = createMockContext({portfolio: undefined});
+    const mockContext = createMockContext({portfolio: undefined, body : { id : 1}});
 
     //Use double await trick to handle the asynchronous logic
     await expect(async () => {
@@ -50,7 +51,7 @@ describe('CheckPortfolioGuard', () => {
     }).rejects.toThrowError(new NotFoundException('Your portfolio does not exist'));
   });
 
-  it('should throw BadRequestException if portfolio id in param and in request.portfolio are not the same', async () => {
+  it('should throw BadRequestException if portfolio id in body and in request.portfolio are not the same', async () => {
     const mockContext = createMockContext(
       { 
         //@ts-ignore
@@ -60,7 +61,7 @@ describe('CheckPortfolioGuard', () => {
           Amount: 1, 
           DateOfPurchase: new Date() 
         }, 
-        id:2
+        body: { id:2 }
       }
     );
 
