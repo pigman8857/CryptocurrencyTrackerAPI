@@ -44,24 +44,24 @@ describe('CryptoService', () => {
   describe('create()', () => {
     it('throws if crypto already exists', async () => {
 
-      spyOn(fakeCryptoRepo,"findOne").mockResolvedValue({ id: 1, name: 'BTC',transactionHistories: null  });
+      spyOn(fakeCryptoRepo,"findOne").mockResolvedValue({ id: 1, name: 'BTC',portfolios: null  });
 
       await expect(service.create({ id: 1, name: 'BTC' })).rejects.toThrow(BadRequestException);
     });
 
     it('creates new crypto if not existing', async () => {
       spyOn(fakeCryptoRepo,"findOne").mockResolvedValue(null);
-      spyOn(fakeCryptoRepo,"create").mockReturnValue({ id: 2, name: 'ETH',transactionHistories: null  });
-      spyOn(fakeCryptoRepo,"save").mockResolvedValue({ id: 2, name: 'ETH',transactionHistories: null  });
+      spyOn(fakeCryptoRepo,"create").mockReturnValue({ id: 2, name: 'ETH',portfolios: null  });
+      spyOn(fakeCryptoRepo,"save").mockResolvedValue({ id: 2, name: 'ETH',portfolios: null  });
 
       const result = await service.create({ id: 2, name: 'ETH'});
-      expect(result).toEqual({ id: 2, name: 'ETH',transactionHistories: null});
+      expect(result).toEqual({ id: 2, name: 'ETH',portfolios: null});
     });
   });
 
   describe('findAll()', () => {
     it('returns crypto list', async () => {
-      const mockList = [{ id: 1, name: 'BTC',transactionHistories: null  }, { id: 2, name: 'ETH',transactionHistories: null }];
+      const mockList = [{ id: 1, name: 'BTC',portfolios: null  }, { id: 2, name: 'ETH',portfolios: null }];
       spyOn(fakeCryptoRepo,"find").mockResolvedValue(mockList);
       expect(await service.findAll()).toEqual(mockList);
     });
@@ -73,8 +73,8 @@ describe('CryptoService', () => {
     });
 
     it('finds one crypto by id', async () => {
-      spyOn(fakeCryptoRepo,"findOne").mockResolvedValue({ id: 1, name: 'BTC',transactionHistories: null  });
-      expect(await service.findOne(1)).toEqual({ id: 1, name: 'BTC',transactionHistories: null });
+      spyOn(fakeCryptoRepo,"findOne").mockResolvedValue({ id: 1, name: 'BTC',portfolios: null  });
+      expect(await service.findOne(1)).toEqual({ id: 1, name: 'BTC',portfolios: null });
     });
   });
 
@@ -89,7 +89,7 @@ describe('CryptoService', () => {
     });
 
     it('updates crypto name', async () => {
-      spyOn(fakeCryptoRepo,"findOne").mockResolvedValue({ id: 3, name: 'DOGE',transactionHistories: null  });
+      spyOn(fakeCryptoRepo,"findOne").mockResolvedValue({ id: 3, name: 'DOGE',portfolios: null  });
       //@ts-ignore
       spyOn(fakeCryptoRepo,"update").mockResolvedValue({ affected: 1 });
 
@@ -106,7 +106,7 @@ describe('CryptoService', () => {
     });
 
     it('removes crypto entity', async () => {
-      const crypto = { id: 4, name: 'XRP', transactionHistories: null };
+      const crypto = { id: 4, name: 'XRP', portfolios: null };
 
       spyOn(fakeCryptoRepo,"findOne").mockResolvedValue(crypto);
      

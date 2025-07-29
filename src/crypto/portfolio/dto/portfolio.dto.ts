@@ -1,9 +1,9 @@
 import { Expose,Type } from "class-transformer";
-import { TransactionType } from "@crypto/transaction-history/entities/transaction-history.entity";
+import { TransactionType } from "@portfolio/entities/portfolio.entity";
 import { UserDTO } from "src/user/dto/user.dto";
 import { CryptoDTO } from "src/crypto/dto/crypto.dto";
 
-export class TransactionHistoryDTO {
+export class PortfolioDTO {
     @Expose()
     id: number;
     

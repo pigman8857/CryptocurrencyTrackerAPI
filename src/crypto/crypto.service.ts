@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException,BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { CreateCryptoDto } from './dto/create-crypto.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';

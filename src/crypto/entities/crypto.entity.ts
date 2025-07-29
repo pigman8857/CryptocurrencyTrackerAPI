@@ -6,7 +6,7 @@ import {
   PrimaryColumn
 } from 'typeorm';
 
-import { TransactionHistory } from '@crypto/transaction-history/entities/transaction-history.entity';
+import { Portfolio } from '@portfolio/entities/portfolio.entity';
 
 @Entity()
 export class Crypto {
@@ -16,6 +16,6 @@ export class Crypto {
   @Column()
   name: string;
 
-  @OneToMany(() => TransactionHistory, (transactionHistories) => transactionHistories.crypto)
-  transactionHistories: TransactionHistory
+  @OneToMany(() => Portfolio, (portfolios) => portfolios.crypto)
+  portfolios: Portfolio[]
 }

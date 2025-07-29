@@ -5,12 +5,12 @@ import { User } from '@src/user/entities/user.entity';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Crypto } from './entities/crypto.entity';
-import { TransactionHistory } from './transaction-history/entities/transaction-history.entity';
-import { TransactionHistoryService } from './transaction-history/transaction-history.service';
+import { Portfolio } from '@portfolio/entities/portfolio.entity';
+import { PortfolioService } from '@portfolio/portfolio.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Crypto,TransactionHistory,User])],
+  imports: [TypeOrmModule.forFeature([Crypto,Portfolio,User])],
   controllers: [CryptoController],
-  providers: [CryptoService, TransactionHistoryService],
+  providers: [CryptoService, PortfolioService],
 })
 export class CryptoModule {}

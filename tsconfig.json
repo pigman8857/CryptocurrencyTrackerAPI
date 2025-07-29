@@ -14,7 +14,7 @@
       "@src/*": ["src/*"],
       "@user/*": ["src/user/*"],
       "@crypto/*": ["src/crypto/*"],
-      "@crypto/transaction-history/*": ["src/crypto/transaction-history/*"],
+      "@portfolio/*": ["src/crypto/portfolio/*"],
     },
     "incremental": true,
     "skipLibCheck": true,

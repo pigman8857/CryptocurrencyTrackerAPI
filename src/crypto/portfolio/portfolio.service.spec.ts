@@ -1,12 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TransactionHistoryService } from './transaction-history.service';
+import { PortfolioService } from './portfolio.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from '@user/entities/user.entity';
 import { Crypto } from '@crypto/entities/crypto.entity';
-import { TransactionHistory } from './entities/transaction-history.entity';
+import { Portfolio } from './entities/portfolio.entity';
 
-describe('TransactionHistoryService', () => {
-  let service: TransactionHistoryService;
+describe('PortfolioService', () => {
+  let service: PortfolioService;
 
   let fakeUserRepo = {
     create: () => Promise.resolve({}),
@@ -32,7 +32,7 @@ describe('TransactionHistoryService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        TransactionHistoryService,
+        PortfolioService,
         {
           provide: getRepositoryToken(User), 
           useValue: fakeUserRepo
@@ -42,13 +42,13 @@ describe('TransactionHistoryService', () => {
           useValue: fakeCrypToRepo
         },
        {
-          provide: getRepositoryToken(TransactionHistory), 
+          provide: getRepositoryToken(Portfolio), 
           useValue: fakeTransHistRepo
         }
       ],
     }).compile();
 
-    service = module.get<TransactionHistoryService>(TransactionHistoryService);
+    service = module.get<PortfolioService>(PortfolioService);
   });
 
   it('should be defined', () => {

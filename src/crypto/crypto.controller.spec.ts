@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CryptoController } from './crypto.controller';
 import { CryptoService } from './crypto.service';
-import { TransactionHistoryService } from './transaction-history/transaction-history.service';
-import { ActCryptoDto } from './dto/act-crypto.dto';
-import { TransactionHistory } from './transaction-history/entities/transaction-history.entity';
+import { PortfolioService } from '@portfolio/portfolio.service';
+import { PurchaseCryptoDto } from './dto/purchase-crypto.dto';
+import { Portfolio } from '@portfolio/entities/portfolio.entity';
 
 const {spyOn, fn, resetAllMocks} = jest;
 
@@ -16,7 +16,7 @@ describe('CryptoController', () => {
     update: fn(),
     remove: fn()
   };
-  let fakeTransHistService = {
+  let fakePortfolioService = {
     create: fn(),
   };
 
@@ -30,8 +30,8 @@ describe('CryptoController', () => {
           useValue: fakeCryptoService
         },
         {
-          provide: TransactionHistoryService,
-          useValue: fakeTransHistService
+          provide: PortfolioService,
+          useValue: fakePortfolioService
         }
       ],
     }).compile();
@@ -49,14 +49,14 @@ describe('CryptoController', () => {
 
   it('crypto/act/:cryptoId able to create transaction history', async() => {
     const fakeCryptoId = 1;
-    const fakeTransactionId = 1;
-    const fakeActCryptoDto: ActCryptoDto = {
+    const fakePortfolioId = 1;
+    const fakePurchaseCryptoDto: PurchaseCryptoDto = {
       crypto: {  
           id: 1,
           name: "fakeCryptoName"
       },
-      buyTime: new Date("2025-07-28T10:00:00.000Z"),
-      priceAt: 100000,
+      dateOfPurchase: new Date("2025-07-28T10:00:00.000Z"),
+      purchasePrice: 100000,
       amount: 1,
       transactionType: "buy"
     };
@@ -64,33 +64,31 @@ describe('CryptoController', () => {
       id: 1,
       email: "john.doe@mgs.com",
       password: "fakepassword",
-      transactionHistories: [],
+      portfolios: [],
       logInsert: jest.fn(),
       logUpdate: jest.fn(),
       logRemove: jest.fn()
     };
 
-    const fakeTransHistService_create_Result: TransactionHistory = {
-      Amount: fakeActCryptoDto.amount,
-      //@ts-ignore
-      crypto: {id: fakeActCryptoDto.crypto.id, name: fakeActCryptoDto.crypto.name },
-      PriceAt: fakeActCryptoDto.priceAt,
-      transactionType: fakeActCryptoDto.transactionType,
-      PriceTimeDate: fakeActCryptoDto.buyTime,
-      id : fakeTransactionId,
-      //@ts-ignore
-      user: {id:user.id, email: user.email}
+    const fakePortfolioService_create_Result = {
+      Amount: fakePurchaseCryptoDto.amount,
+      crypto: {id: fakePurchaseCryptoDto.crypto.id, name: fakePurchaseCryptoDto.crypto.name },
+      PurchasePrice: fakePurchaseCryptoDto.purchasePrice,
+      transactionType: fakePurchaseCryptoDto.transactionType,
+      DateOfPurchase: fakePurchaseCryptoDto.dateOfPurchase,
+      id : fakePortfolioId,
+      user: {id:user.id, email: user.email }
     } 
 
-    const expectResult = {...fakeTransHistService_create_Result}    
+    const expectResult = {...fakePortfolioService_create_Result}    
 
-    spyOn(fakeTransHistService,"create").mockResolvedValueOnce(fakeTransHistService_create_Result);
+    spyOn(fakePortfolioService,"create").mockResolvedValueOnce(fakePortfolioService_create_Result);
 
-    const result = await controller.action(fakeCryptoId, fakeActCryptoDto, user);
+    const result = await controller.action(fakeCryptoId, fakePurchaseCryptoDto, user);
     expect(result).toBeDefined();
     expect(result.Amount).toBe(expectResult.Amount)
-    expect(result.PriceAt).toBe(expectResult.PriceAt)
-    expect(result.PriceTimeDate).toBe(expectResult.PriceTimeDate)
-    expect(fakeTransHistService.create).toHaveBeenCalledWith(fakeActCryptoDto, user);
+    expect(result.PurchasePrice).toBe(expectResult.PurchasePrice)
+    expect(result.DateOfPurchase).toBe(expectResult.DateOfPurchase)
+    expect(fakePortfolioService.create).toHaveBeenCalledWith(fakePurchaseCryptoDto, user);
   })
 });

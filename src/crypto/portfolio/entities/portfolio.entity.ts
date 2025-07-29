@@ -5,24 +5,24 @@ import { User } from 'src/user/entities/user.entity';
 export type TransactionType = 'buy' | 'sell';
 
 @Entity()
-export class TransactionHistory {
+export class Portfolio {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User, (user) => user.transactionHistories)
+  @ManyToOne(() => User, (user) => user.portfolios)
   user: User;
 
-  @ManyToOne(() => Crypto, (crypto) => crypto.transactionHistories)
+  @ManyToOne(() => Crypto, (crypto) => crypto.portfolios)
   crypto: Crypto;
 
   @Column('decimal', { precision: 20, scale: 8 })
-  PriceAt: number;
+  PurchasePrice: number;
 
   @Column('decimal', { precision: 20, scale: 8 })
   Amount: number;
 
   @Column()
-  PriceTimeDate: Date;
+  DateOfPurchase: Date;
 
   @Column()
   transactionType: TransactionType;

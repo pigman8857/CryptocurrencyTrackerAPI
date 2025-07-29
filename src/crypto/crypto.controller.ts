@@ -1,14 +1,14 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { CryptoService } from './crypto.service';
 import { CreateCryptoDto } from './dto/create-crypto.dto';
-import { ActCryptoDto } from './dto/act-crypto.dto';
+import { PurchaseCryptoDto } from './dto/purchase-crypto.dto';
 import { AuthGuard } from '@src/guards/auth/auth.guard';
 import { CurrentUser } from 'src/decorators/current-user/current-user.decorator';
 import { User } from '@user/entities/user.entity';
-import { TransactionHistoryService } from './transaction-history/transaction-history.service';
+import { PortfolioService } from '@portfolio/portfolio.service';
 import { Serialize } from '@src/interceptors/serialize/serialize.interceptor';
-import { TransactionHistoryDTO } from './transaction-history/dto/transaction-history.dto';
-import { TransactionHistory } from './transaction-history/entities/transaction-history.entity';
+import { PortfolioDTO } from '@portfolio/dto/portfolio.dto';
+import { Portfolio } from '@portfolio/entities/portfolio.entity';
 import { CryptoDTO } from './dto/crypto.dto';
 import { Crypto } from './entities/crypto.entity';
 import { UpdateCryptoDto } from './dto/update-crypto.dto';
@@ -17,19 +17,19 @@ import { UpdateCryptoDto } from './dto/update-crypto.dto';
 export class CryptoController {
   constructor(
     private readonly cryptoService: CryptoService, 
-    private readonly transHistService: TransactionHistoryService
+    private readonly portfolioService: PortfolioService
   ) {}
 
 
   @Post('act/:cryptoId')
   @UseGuards(AuthGuard)
-  @Serialize(TransactionHistoryDTO)
+  @Serialize(PortfolioDTO)
   async action(
     @Param() cryptoId: number,
-    @Body() actCryptoDto: ActCryptoDto, 
+    @Body() purchaseCryptoDto: PurchaseCryptoDto, 
     @CurrentUser() user: User)
-    : Promise<TransactionHistory> {
-    return await this.transHistService.create(actCryptoDto,user);
+    : Promise<Portfolio> {
+    return await this.portfolioService.create(purchaseCryptoDto,user);
   }
 
   @Post()
