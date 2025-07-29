@@ -17,8 +17,4 @@ export class CreatePortfolioDto {
 
   @IsNumber()
   amount: number;
-
-  @IsString()
-  @Matches(/^(buy|sell)$/,{ message: 'Type must be either "buy" or "sell"' })
-  transactionType: 'buy' | 'sell'
 }

@@ -7,10 +7,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Crypto } from './entities/crypto.entity';
 import { Portfolio } from '@portfolio/entities/portfolio.entity';
 import { PortfolioService } from '@portfolio/portfolio.service';
+import { PortfolioController } from './portfolio/portfolio.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Crypto,Portfolio,User])],
-  controllers: [CryptoController],
+  controllers: [CryptoController, PortfolioController],
   providers: [CryptoService, PortfolioService],
 })
 export class CryptoModule {}

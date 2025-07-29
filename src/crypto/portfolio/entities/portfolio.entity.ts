@@ -23,7 +23,4 @@ export class Portfolio {
 
   @Column()
   DateOfPurchase: Date;
-
-  @Column()
-  transactionType: TransactionType;
 }
