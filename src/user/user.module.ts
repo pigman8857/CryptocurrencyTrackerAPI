@@ -4,16 +4,17 @@ import { User } from 'src/user/entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserController } from './user.controller';
 import { AuthService } from './auth/auth.service';
-import { CurrentUserMiddleware } from '@src/middlewares/current-user/current-user.middleware';
-import { TransactionHistory } from '@crypto/transaction-history/entities/transaction-history.entity';
+import { CurrentUserMiddleware } from '@src/middlewares/current-user.middleware';
+import { Portfolio } from '@portfolio/entities/portfolio.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User,TransactionHistory])],
+  imports: [TypeOrmModule.forFeature([User,Portfolio])],
   providers: [UserService, AuthService],
-  controllers: [UserController]
+  controllers: [UserController],
+  exports: [UserService], // 👈 Export for crypto module to use so that current-user.middleware that is also used by crypto module can use it.
 })
 export class UserModule {
     configure(consumer: MiddlewareConsumer){
-    consumer.apply(CurrentUserMiddleware).forRoutes('*');
+    consumer.apply(CurrentUserMiddleware).forRoutes(UserController);
   }
 }

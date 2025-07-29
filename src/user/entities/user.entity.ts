@@ -1,4 +1,4 @@
-import { TransactionHistory } from '@crypto/transaction-history/entities/transaction-history.entity';
+import { Portfolio } from '@portfolio/entities/portfolio.entity';
 import {
   Entity,
   Column,
@@ -21,8 +21,8 @@ export class User {
   password: string;
   
 
-  @OneToMany(() => TransactionHistory, (transaction) => transaction.user)
-  transactionHistories: TransactionHistory[];
+  @OneToMany(() => Portfolio, (portfolio) => portfolio.user)
+  portfolios: Portfolio[];
 
   @AfterInsert()
   logInsert() {

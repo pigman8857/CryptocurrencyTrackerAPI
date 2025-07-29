@@ -1,8 +1,8 @@
-import { CreateCryptoDto } from './create-crypto.dto';
-import { IsString, IsNumber,IsDateString, Matches, IsObject, ValidateNested} from 'class-validator';
+import { CreateCryptoDto } from '@src/crypto/dto/create-crypto.dto';
+import { IsNumber,IsDateString, IsObject, ValidateNested} from 'class-validator';
 import { Type } from 'class-transformer';
 
-export class ActCryptoDto {
+export class CreatePortfolioDto {
 
   @IsObject()
   @ValidateNested() // Validates the nested DTO
@@ -10,15 +10,11 @@ export class ActCryptoDto {
   crypto: CreateCryptoDto;
 
   @IsDateString()//ISO 8601 date string YYYY-MM-DDThh:mm:ss.sssZ. Exp: 2025-07-28T10:00:00.000Z
-  buyTime: Date;
+  dateOfPurchase: Date;
 
   @IsNumber()
-  priceAt: number;
+  purchasePrice: number;
 
   @IsNumber()
   amount: number;
-
-  @IsString()
-  @Matches(/^(buy|sell)$/,{ message: 'Type must be either "buy" or "sell"' })
-  transactionType: 'buy' | 'sell'
 }

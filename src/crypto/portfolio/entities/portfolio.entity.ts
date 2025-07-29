@@ -1,29 +1,26 @@
 import { Column,Entity,PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Crypto } from '../../entities/crypto.entity';
+import { Crypto } from '@crypto/entities/crypto.entity';
 import { User } from 'src/user/entities/user.entity';
 
 export type TransactionType = 'buy' | 'sell';
 
 @Entity()
-export class TransactionHistory {
+export class Portfolio {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User, (user) => user.transactionHistories)
+  @ManyToOne(() => User, (user) => user.portfolios)
   user: User;
 
-  @ManyToOne(() => Crypto, (crypto) => crypto.transactionHistories)
+  @ManyToOne(() => Crypto, (crypto) => crypto.portfolios)
   crypto: Crypto;
 
   @Column('decimal', { precision: 20, scale: 8 })
-  PriceAt: number;
+  purchasePrice: number;
 
   @Column('decimal', { precision: 20, scale: 8 })
-  Amount: number;
+  amount: number;
 
   @Column()
-  PriceTimeDate: Date;
-
-  @Column()
-  transactionType: TransactionType;
+  dateOfPurchase: Date;
 }
