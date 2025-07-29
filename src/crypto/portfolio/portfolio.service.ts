@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import { Portfolio } from './entities/portfolio.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '@user/entities/user.entity';
-import { CreatePortfolioDto } from '@src/crypto/portfolio/dto/create-portfolio.dto';
+import { CreatePortfolioDto } from '@portfolio/dto/create-portfolio.dto';
 
 
 @Injectable()

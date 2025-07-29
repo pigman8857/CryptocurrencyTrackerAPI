@@ -1,5 +1,5 @@
-import { CreateCryptoDto } from '../../dto/create-crypto.dto';
-import { IsString, IsNumber,IsDateString, Matches, IsObject, ValidateNested} from 'class-validator';
+import { CreateCryptoDto } from '@src/crypto/dto/create-crypto.dto';
+import { IsNumber,IsDateString, IsObject, ValidateNested} from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreatePortfolioDto {
