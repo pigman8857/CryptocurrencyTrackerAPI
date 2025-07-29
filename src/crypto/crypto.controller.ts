@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { CryptoService } from './crypto.service';
 import { CreateCryptoDto } from './dto/create-crypto.dto';
 import { PortfolioService } from '@portfolio/portfolio.service';
-import { Serialize } from '@src/interceptors/serialize/serialize.interceptor';
+import { Serialize } from '@src/interceptors/serialize.interceptor';
 import { CryptoDTO } from './dto/crypto.dto';
 import { Crypto } from './entities/crypto.entity';
 import { UpdateCryptoDto } from './dto/update-crypto.dto';

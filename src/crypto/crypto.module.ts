@@ -8,7 +8,7 @@ import { Crypto } from './entities/crypto.entity';
 import { Portfolio } from '@portfolio/entities/portfolio.entity';
 import { PortfolioService } from '@portfolio/portfolio.service';
 import { PortfolioController } from './portfolio/portfolio.controller';
-import { CurrentUserMiddleware } from '@src/middlewares/current-user/current-user.middleware';
+import { CurrentUserMiddleware } from '@src/middlewares/current-user.middleware';
 import { GetPortfolioMiddleware } from './portfolio/middlewares/get-portfolio.middleware';
 import { UserModule } from '@src/user/user.module';
 

@@ -4,7 +4,7 @@ import { User } from 'src/user/entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserController } from './user.controller';
 import { AuthService } from './auth/auth.service';
-import { CurrentUserMiddleware } from '@src/middlewares/current-user/current-user.middleware';
+import { CurrentUserMiddleware } from '@src/middlewares/current-user.middleware';
 import { Portfolio } from '@portfolio/entities/portfolio.entity';
 
 @Module({

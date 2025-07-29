@@ -1,8 +1,8 @@
 import { Body, Controller, Param, Patch, Post, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@src/guards/auth/auth.guard';
+import { AuthGuard } from '@src/guards/auth.guard';
 import { PortfolioDTO } from './dto/portfolio.dto';
-import { Serialize } from '@src/interceptors/serialize/serialize.interceptor';
-import { CurrentUser } from '@src/decorators/current-user/current-user.decorator';
+import { Serialize } from '@src/interceptors/serialize.interceptor';
+import { CurrentUser } from '@src/decorators/current-user.decorator';
 import { CreatePortfolioDto } from './dto/create-portfolio.dto';
 import { User } from '@user/entities/user.entity';
 import { Portfolio } from './entities/portfolio.entity';
