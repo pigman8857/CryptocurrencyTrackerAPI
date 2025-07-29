@@ -1,8 +1,8 @@
-import { CreateCryptoDto } from './create-crypto.dto';
+import { CreateCryptoDto } from '../../dto/create-crypto.dto';
 import { IsString, IsNumber,IsDateString, Matches, IsObject, ValidateNested} from 'class-validator';
 import { Type } from 'class-transformer';
 
-export class PurchaseCryptoDto {
+export class CreatePortfolioDto {
 
   @IsObject()
   @ValidateNested() // Validates the nested DTO

@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import { Portfolio } from './entities/portfolio.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '@user/entities/user.entity';
-import { PurchaseCryptoDto } from '@src/crypto/dto/purchase-crypto.dto';
+import { CreatePortfolioDto } from '@src/crypto/portfolio/dto/create-portfolio.dto';
 
 
 @Injectable()
@@ -15,7 +15,7 @@ export class PortfolioService {
   ){}
   
 
-  async create(purchaseCryptoDto: PurchaseCryptoDto, user: User) {
+  async create(purchaseCryptoDto: CreatePortfolioDto, user: User) {
     const createdHistory = await this.transHistRepo.create({
       DateOfPurchase: purchaseCryptoDto.dateOfPurchase,
       PurchasePrice: purchaseCryptoDto.purchasePrice,

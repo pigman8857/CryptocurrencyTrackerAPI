@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { CryptoService } from './crypto.service';
 import { CreateCryptoDto } from './dto/create-crypto.dto';
-import { PurchaseCryptoDto } from './dto/purchase-crypto.dto';
+import { CreatePortfolioDto } from './portfolio/dto/create-portfolio.dto';
 import { AuthGuard } from '@src/guards/auth/auth.guard';
 import { CurrentUser } from 'src/decorators/current-user/current-user.decorator';
 import { User } from '@user/entities/user.entity';
@@ -26,7 +26,7 @@ export class CryptoController {
   @Serialize(PortfolioDTO)
   async action(
     @Param() cryptoId: number,
-    @Body() purchaseCryptoDto: PurchaseCryptoDto, 
+    @Body() purchaseCryptoDto: CreatePortfolioDto, 
     @CurrentUser() user: User)
     : Promise<Portfolio> {
     return await this.portfolioService.create(purchaseCryptoDto,user);

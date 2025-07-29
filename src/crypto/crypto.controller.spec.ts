@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CryptoController } from './crypto.controller';
 import { CryptoService } from './crypto.service';
 import { PortfolioService } from '@portfolio/portfolio.service';
-import { PurchaseCryptoDto } from './dto/purchase-crypto.dto';
+import { CreatePortfolioDto } from './portfolio/dto/create-portfolio.dto';
 import { Portfolio } from '@portfolio/entities/portfolio.entity';
 
 const {spyOn, fn, resetAllMocks} = jest;
@@ -50,7 +50,7 @@ describe('CryptoController', () => {
   it('crypto/act/:cryptoId able to create transaction history', async() => {
     const fakeCryptoId = 1;
     const fakePortfolioId = 1;
-    const fakePurchaseCryptoDto: PurchaseCryptoDto = {
+    const fakePurchaseCryptoDto: CreatePortfolioDto = {
       crypto: {  
           id: 1,
           name: "fakeCryptoName"
