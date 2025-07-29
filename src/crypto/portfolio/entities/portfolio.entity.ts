@@ -1,5 +1,5 @@
 import { Column,Entity,PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Crypto } from '../../entities/crypto.entity';
+import { Crypto } from '@crypto/entities/crypto.entity';
 import { User } from 'src/user/entities/user.entity';
 
 export type TransactionType = 'buy' | 'sell';
@@ -16,11 +16,11 @@ export class Portfolio {
   crypto: Crypto;
 
   @Column('decimal', { precision: 20, scale: 8 })
-  PurchasePrice: number;
+  purchasePrice: number;
 
   @Column('decimal', { precision: 20, scale: 8 })
-  Amount: number;
+  amount: number;
 
   @Column()
-  DateOfPurchase: Date;
+  dateOfPurchase: Date;
 }

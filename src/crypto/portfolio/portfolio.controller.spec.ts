@@ -57,10 +57,10 @@ describe('PortfolioController', () => {
     };
 
     const fakePortfolioService_create_Result = {
-      Amount: fakeCreateCryptoDto.amount,
+      amount: fakeCreateCryptoDto.amount,
       crypto: {id: fakeCreateCryptoDto.crypto.id, name: fakeCreateCryptoDto.crypto.name },
-      PurchasePrice: fakeCreateCryptoDto.purchasePrice,
-      DateOfPurchase: fakeCreateCryptoDto.dateOfPurchase,
+      purchasePrice: fakeCreateCryptoDto.purchasePrice,
+      dateOfPurchase: fakeCreateCryptoDto.dateOfPurchase,
       id : fakePortfolioId,
       user: {id:user.id, email: user.email }
     } 
@@ -71,9 +71,9 @@ describe('PortfolioController', () => {
 
     const result = await controller.create(fakeCreateCryptoDto, user);
     expect(result).toBeDefined();
-    expect(result.Amount).toBe(expectResult.Amount)
-    expect(result.PurchasePrice).toBe(expectResult.PurchasePrice)
-    expect(result.DateOfPurchase).toBe(expectResult.DateOfPurchase)
+    expect(result.amount).toBe(expectResult.amount)
+    expect(result.purchasePrice).toBe(expectResult.purchasePrice)
+    expect(result.dateOfPurchase).toBe(expectResult.dateOfPurchase)
     expect(fakePortfolioService.create).toHaveBeenCalledWith(fakeCreateCryptoDto, user);
   })
 });

@@ -35,8 +35,8 @@ describe('GetPortfolioMiddleware', () => {
     //@ts-ignore
     const fakePortfolio: Portfolio = {
       id: 1,
-      Amount : 999,
-      DateOfPurchase: new Date()
+      amount : 999,
+      dateOfPurchase: new Date()
     };
 
     spyOn(portfolioService,"findOne").mockResolvedValue(fakePortfolio);

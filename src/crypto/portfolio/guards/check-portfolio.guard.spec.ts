@@ -32,9 +32,9 @@ describe('CheckPortfolioGuard', () => {
         //@ts-ignore
         portfolio: { 
           id:1, 
-          PurchasePrice: 999, 
-          Amount: 1, 
-          DateOfPurchase: new Date() 
+          purchasePrice: 999, 
+          amount: 1, 
+          dateOfPurchase: new Date() 
         }, 
         body: { id : 1 }
       }
@@ -57,9 +57,9 @@ describe('CheckPortfolioGuard', () => {
         //@ts-ignore
         portfolio: { 
           id:1, 
-          PurchasePrice: 999, 
-          Amount: 1, 
-          DateOfPurchase: new Date() 
+          purchasePrice: 999, 
+          amount: 1, 
+          dateOfPurchase: new Date() 
         }, 
         body: { id:2 }
       }

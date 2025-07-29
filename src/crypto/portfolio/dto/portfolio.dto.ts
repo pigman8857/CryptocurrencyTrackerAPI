@@ -8,13 +8,13 @@ export class PortfolioDTO {
     id: number;
     
     @Expose()
-    Amount: number;
+    amount: number;
 
     @Expose()
-    PurchasePrice: number;
+    purchasePrice: number;
 
     @Expose()
-    DateOfPurchase: Date;
+    dateOfPurchase: Date;
 
     @Expose()
     @Type(() => CryptoDTO)// This tells class-transformer to apply CryptoDTO transformation

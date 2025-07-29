@@ -48,9 +48,9 @@ export class PortfolioService {
 
   async create(createPortfolioDto: CreatePortfolioDto, user: User) {
     const createdHistory = await this.portfolioRepo.create({
-      DateOfPurchase: createPortfolioDto.dateOfPurchase,
-      PurchasePrice: createPortfolioDto.purchasePrice,
-      Amount: createPortfolioDto.amount,
+      dateOfPurchase: createPortfolioDto.dateOfPurchase,
+      purchasePrice: createPortfolioDto.purchasePrice,
+      amount: createPortfolioDto.amount,
     })
     
     createdHistory.user = user;
@@ -69,12 +69,14 @@ export class PortfolioService {
         return null;
     }
 
-    const portfolioToUpdate = {
-      DateOfPurchase: updatePortfolioDto.dateOfPurchase,
-      PurchasePrice: updatePortfolioDto.purchasePrice,
-      Amount: updatePortfolioDto.amount,
+    //@ts-ignore
+    const portfolioToUpdate: Portfolio = {
+      dateOfPurchase: updatePortfolioDto.dateOfPurchase,
+      purchasePrice: updatePortfolioDto.purchasePrice,
+      amount: updatePortfolioDto.amount,
       user,
-      crypto: updatePortfolioDto.crypto
+      //@ts-ignore
+      crypto: { id: updatePortfolioDto.crypto.id }
     }
 
     return await this.portfolioRepo.update(id,portfolioToUpdate) 
