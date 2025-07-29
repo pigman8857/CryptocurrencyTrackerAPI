@@ -4,6 +4,7 @@ import { Portfolio } from './entities/portfolio.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '@user/entities/user.entity';
 import { CreatePortfolioDto } from '@portfolio/dto/create-portfolio.dto';
+import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
 
 
 @Injectable()
@@ -20,25 +21,37 @@ export class PortfolioService {
     return this.portfolioRepo.findOne({where: {id}});
   }
 
-  async create(purchaseCryptoDto: CreatePortfolioDto, user: User) {
+  async create(createPortfolioDto: CreatePortfolioDto, user: User) {
     const createdHistory = await this.portfolioRepo.create({
-      DateOfPurchase: purchaseCryptoDto.dateOfPurchase,
-      PurchasePrice: purchaseCryptoDto.purchasePrice,
-      Amount: purchaseCryptoDto.amount,
+      DateOfPurchase: createPortfolioDto.dateOfPurchase,
+      PurchasePrice: createPortfolioDto.purchasePrice,
+      Amount: createPortfolioDto.amount,
     })
     
     createdHistory.user = user;
 
     //@ts-ignore
     createdHistory.crypto = {
-      id:purchaseCryptoDto.crypto.id,
-      name: purchaseCryptoDto.crypto.name,
+      id:createPortfolioDto.crypto.id,
+      name: createPortfolioDto.crypto.name,
     } 
 
     return await this.portfolioRepo.save(createdHistory)
   }
   
-  async update(portfolioId: number,purchaseCryptoDto: CreatePortfolioDto, user: User){
+  async update(id: number,updatePortfolioDto: UpdatePortfolioDto, user: User){
+    if(!id){
+        return null;
+    }
 
+    const portfolioToUpdate = {
+      DateOfPurchase: updatePortfolioDto.dateOfPurchase,
+      PurchasePrice: updatePortfolioDto.purchasePrice,
+      Amount: updatePortfolioDto.amount,
+      user,
+      crypto: updatePortfolioDto.crypto
+    }
+
+    return await this.portfolioRepo.update(id,portfolioToUpdate) 
   }
 }

@@ -10,12 +10,12 @@ describe('CheckPortfolioGuard', () => {
     guard = new CheckPortfolioGuard();
   });
 
-  const createMockContext = ({portfolio, portfolioId}: {portfolio?:Portfolio; portfolioId?: number }): ExecutionContext => {
+  const createMockContext = ({portfolio, id}: {portfolio?:Portfolio; id?: number }): ExecutionContext => {
     return {
       switchToHttp: () => ({
         getRequest: () => ({  
           portfolio,
-          params: { portfolioId } }),
+          params: { id } }),
       }),
     } as unknown as ExecutionContext;
   };
@@ -35,7 +35,7 @@ describe('CheckPortfolioGuard', () => {
           Amount: 1, 
           DateOfPurchase: new Date() 
         }, 
-        portfolioId:1
+        id:1
       }
     );
     await expect(guard.canActivate(mockContext)).toBe(true);
@@ -60,7 +60,7 @@ describe('CheckPortfolioGuard', () => {
           Amount: 1, 
           DateOfPurchase: new Date() 
         }, 
-        portfolioId:2
+        id:2
       }
     );
 

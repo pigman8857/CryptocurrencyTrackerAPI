@@ -9,6 +9,7 @@ import { Portfolio } from './entities/portfolio.entity';
 import { PortfolioService } from './portfolio.service';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
 import { CheckPortfolioGuard } from './guards/check-portfolio.guard';
+import { UpdateResult } from 'typeorm';
 
 @Controller('crypto/portfolio')
 export class PortfolioController {
@@ -26,15 +27,15 @@ export class PortfolioController {
     return await this.portfolioService.create(createPortfolioDto,user);
   }
 
-  @Patch('/:portfolioId')
+  @Patch('/:id')
   @UseGuards(AuthGuard,CheckPortfolioGuard)
   @Serialize(PortfolioDTO)
   async update(
-    @Param() portfolioId: number,
+    @Param('id') id: number,
     @Body() updatePortfolioDto: UpdatePortfolioDto, 
     @CurrentUser() user: User)
-    : Promise<Portfolio> {
-    console.log('patch portfolio controller',updatePortfolioDto, user);
-    return null; //await this.portfolioService.update(portfolioId,createPortfolioDto,user);
+    : Promise<UpdateResult> {
+    console.log('id,',id);
+    return await this.portfolioService.update(id,updatePortfolioDto,user);
   }
 }

@@ -10,12 +10,12 @@ export class CheckPortfolioGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const portfolio = request.portfolio as Portfolio
   
-    const {portfolioId} = request.params as { portfolioId: number}
+    const {id} = request.params as { id: number }
     if(!portfolio){
       throw new NotFoundException('Your portfolio does not exist');
     }
 
-    if(portfolio.id != portfolioId){
+    if(portfolio.id != id){
        throw new BadRequestException('Your portfolio id in url param and body are not the same');
     }
 
