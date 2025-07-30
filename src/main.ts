@@ -6,7 +6,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: 'http://localhost:8080', // allow your frontend origin
+    // allow your frontend origin. First one is from local. Second is from docker container.
+    origin: ['http://localhost:8080','http://localhost:3000'], 
     methods: 'GET,POST,PUT,DELETE,PATCH', // specify allowed methods
     credentials: true, // if using cookies or auth headers
   });
