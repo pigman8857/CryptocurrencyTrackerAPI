@@ -17,7 +17,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "echo 'jest --config ./test/jest-e2e.json, the command is disabled. We have no e2e yet'",
     "build:dev:image": "docker build --build-arg NODE_ENV=development -t crypto-track-api:dev .",
     "start:dev:image": "docker run --rm --name crypto-api --env NODE_ENV=development -p 3001:3001 --network crypto_net crypto-track-api:dev",
     "migrate:generate": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate -d migration-data-source.ts",
