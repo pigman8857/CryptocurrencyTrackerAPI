@@ -7,9 +7,11 @@ import {
   AfterRemove,
   AfterUpdate,
   OneToMany,
+  Index,
 } from 'typeorm';
 
 @Entity()
+@Index(["id"],{ unique: true }) 
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
