@@ -7,6 +7,7 @@ import { CreatePortfolioDto } from './dto/create-portfolio.dto';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
 import { CreateCryptoDto } from '@src/crypto/dto/create-crypto.dto';
 import { Repository } from 'typeorm';
+import { PaginationDto } from './dto/pagination.dto';
 
 const { spyOn, resetAllMocks, fn } = jest;
 
@@ -56,6 +57,32 @@ describe('PortfolioService', () => {
       expect(await service.findOne(1)).toEqual(mockPortfolio);
     });
   });
+
+
+  describe('findAll()', () => {
+    it('returns null if no id provided', async () => {
+      expect(await service.findAll(undefined,undefined)).toBeNull();
+    });
+
+    it('returns portfolio when found', async () => {
+      const pagination: PaginationDto = {
+        limit: 10,
+        offset: 0
+      }
+
+      const mockPortfolio = { id: 1, Amount: 10, PurchasePrice: 999, DateOfPurchase: new Date('2025-07-29T10:00:00.000Z') };
+      //@ts-ignore
+      spyOn(fakePortfolioRepo, 'find').mockResolvedValue(mockPortfolio);
+      expect(await service.findAll(1,pagination)).toEqual(mockPortfolio);
+
+      //@ts-ignore
+      spyOn(fakePortfolioRepo, 'find').mockResolvedValue(mockPortfolio);
+      expect(await service.findAll(1,undefined)).toEqual(mockPortfolio);
+    });
+
+
+  });
+
 
   describe('create()', () => {
     it('creates portfolio from DTO and user', async () => {
