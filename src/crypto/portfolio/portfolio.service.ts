@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '@user/entities/user.entity';
 import { CreatePortfolioDto } from '@portfolio/dto/create-portfolio.dto';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
+import { PaginationDto } from './dto/pagination.dto';
 
 
 @Injectable()
@@ -35,19 +36,22 @@ export class PortfolioService {
       relations:['crypto','user']});
   }
 
-  async findAll(userId: number): Promise<Portfolio[]>{
+  async findAll(userId: number, pagination?: PaginationDto): Promise<Portfolio[]>{
     if(!userId){
       return null;
     }
+    const { limit = 10, offset = 0 } = pagination || {};
 
     return await this.portfolioRepo.find({
       relations: ['crypto'],
       where: { user : { id:userId }},
+      skip: offset,
+      take: limit,
     })
   }
 
   async create(createPortfolioDto: CreatePortfolioDto, user: User) {
-    const createdHistory = await this.portfolioRepo.create({
+    const createdHistory = this.portfolioRepo.create({
       dateOfPurchase: createPortfolioDto.dateOfPurchase,
       purchasePrice: createPortfolioDto.purchasePrice,
       amount: createPortfolioDto.amount,

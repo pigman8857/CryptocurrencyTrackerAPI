@@ -7,10 +7,12 @@ async function bootstrap() {
 
   app.enableCors({
     origin: 'http://localhost:8080', // allow your frontend origin
-    methods: 'GET,POST,PUT,DELETE', // specify allowed methods
+    methods: 'GET,POST,PUT,DELETE,PATCH', // specify allowed methods
     credentials: true, // if using cookies or auth headers
   });
-  app.useGlobalPipes(new ValidationPipe());
+
+  //Use{ transform: true } to ensure this dto Query() transformation always happens
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
   await app.listen(process.env.PORT ?? 3001);
 }

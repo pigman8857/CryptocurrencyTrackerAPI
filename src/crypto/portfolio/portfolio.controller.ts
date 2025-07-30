@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthGuard } from '@src/guards/auth.guard';
 import { PortfolioDTO } from './dto/portfolio.dto';
 import { Serialize } from '@src/interceptors/serialize.interceptor';
@@ -10,6 +10,7 @@ import { PortfolioService } from './portfolio.service';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
 import { CheckPortfolioGuard } from './guards/check-portfolio.guard';
 import { UpdateResult } from 'typeorm';
+import { PaginationDto } from './dto/pagination.dto';
 
 @Controller('crypto/portfolio')
 @UseGuards(AuthGuard)
@@ -21,8 +22,8 @@ export class PortfolioController {
 
   @Get('/all')
   @Serialize(PortfolioDTO)
-  async findAll(@CurrentUser() user: User){
-    return await this.portfolioService.findAll(user.id);
+  async findAll(@Query() pagination: PaginationDto,@CurrentUser() user: User){
+    return await this.portfolioService.findAll(user.id, pagination);
   }
 
   @Post()
