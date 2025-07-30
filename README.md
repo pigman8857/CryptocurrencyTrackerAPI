@@ -50,7 +50,7 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## More packages requirement
+## More required packages
 
 ```bash
 # install cross-env as global. cross-env is needed for db migration and running application commands
@@ -58,6 +58,8 @@ $ npm install -g cross-env
 
 # ts-node is needed for migration commands
 $ npm install ts-node --save-dev
+# or below if you want to install as global
+$ npm install -g ts-node
 
 # typeorm cli, is used for database migration.
 $ npm install -g typeorm
