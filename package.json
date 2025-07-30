@@ -19,7 +19,11 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "build:image:dev": "docker build --build-arg NODE_ENV=development -t crypto-track-api:dev .",
-    "start:image:dev": "docker run --rm --name crypto-api -p 3001:3001 crypto-track-api:dev"
+    "start:image:dev": "docker run --rm --name crypto-api -p 3001:3001 crypto-track-api:dev",
+    "migrate:generate": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate -d migration-data-source.ts",
+    "migrate:create": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create",
+    "migrate:up": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d migration-data-source.ts",
+    "migrate:down": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:revert -d migration-data-source.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -32,7 +36,6 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
     "cookie-session": "^2.1.1",
-    "cross-env": "^7.0.3",
     "mysql2": "^3.14.2",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
@@ -66,7 +69,7 @@
       "js",
       "json",
       "ts"
-    ],    
+    ],
     "modulePaths": [
       "<rootDir>"
     ],
