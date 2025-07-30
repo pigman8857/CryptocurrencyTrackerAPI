@@ -3,12 +3,14 @@ import {
   Column,
   PrimaryGeneratedColumn,
   OneToMany,
-  PrimaryColumn
+  PrimaryColumn,
+  Index
 } from 'typeorm';
 
 import { Portfolio } from '@portfolio/entities/portfolio.entity';
 
 @Entity()
+@Index(["id"],{ unique: true }) 
 export class Crypto {
   @PrimaryColumn()
   id: number;
