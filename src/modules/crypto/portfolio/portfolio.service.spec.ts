@@ -5,7 +5,7 @@ import { Portfolio } from './entities/portfolio.entity';
 import { User } from '@user/entities/user.entity';
 import { CreatePortfolioDto } from './dto/create-portfolio.dto';
 import { UpdatePortfolioDto } from './dto/update-portfolio.dto';
-import { CreateCryptoDto } from '@src/crypto/dto/create-crypto.dto';
+import { CreateCryptoDto } from '@crypto/dto/create-crypto.dto';
 import { Repository } from 'typeorm';
 import { PaginationDto } from './dto/pagination.dto';
 
