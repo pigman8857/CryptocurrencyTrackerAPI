@@ -12,9 +12,9 @@
     "baseUrl": "./",
     "paths": {
       "@src/*": ["src/*"],
-      "@user/*": ["src/user/*"],
-      "@crypto/*": ["src/crypto/*"],
-      "@portfolio/*": ["src/crypto/portfolio/*"],
+      "@user/*": ["src/modules/user/*"],
+      "@crypto/*": ["src/modules/crypto/*"],
+      "@portfolio/*": ["src/modules/crypto/portfolio/*"],
     },
     "incremental": true,
     "skipLibCheck": true,
