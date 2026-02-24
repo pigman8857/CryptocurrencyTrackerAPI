@@ -1,16 +1,16 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { CryptoService } from './crypto.service';
 import { CryptoController } from './crypto.controller';
-import { User } from '@src/user/entities/user.entity';
+import { User } from '@user/entities/user.entity';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Crypto } from './entities/crypto.entity';
 import { Portfolio } from '@portfolio/entities/portfolio.entity';
 import { PortfolioService } from '@portfolio/portfolio.service';
 import { PortfolioController } from './portfolio/portfolio.controller';
-import { CurrentUserMiddleware } from '@src/middlewares/current-user.middleware';
+import { CurrentUserMiddleware } from '@src/common/middlewares/current-user.middleware';
 import { GetPortfolioMiddleware } from './portfolio/middlewares/get-portfolio.middleware';
-import { UserModule } from '@src/user/user.module';
+import { UserModule } from '@user/user.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Crypto,Portfolio,User]), UserModule],

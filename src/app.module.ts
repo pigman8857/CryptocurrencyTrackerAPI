@@ -3,9 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DatabaseConfigService } from './config/database.config';
-import { UserModule } from './user/user.module';
-import { CryptoModule } from './crypto/crypto.module';
+import { DatabaseConfigService } from './common/config/database.config';
+import { UserModule } from './modules/user/user.module';
+import { CryptoModule } from './modules/crypto/crypto.module';
 
 const cookieSession = require('cookie-session');
 

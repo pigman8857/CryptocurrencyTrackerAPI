@@ -1,13 +1,13 @@
 import { Body, Controller, Get, Param, Post, Session, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User } from 'src/user/entities/user.entity';
+import { User } from '@user/entities/user.entity';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { AuthService } from './auth/auth.service';
 import { UserDTO } from './dto/user.dto';
-import { Serialize } from '@src/interceptors/serialize.interceptor';
+import { Serialize } from '@src/common/interceptors/serialize.interceptor';
 import { SignInDTO } from './dto/signin-user.dto';
-import { CurrentUser } from '@src/decorators/current-user.decorator'
-import { AuthDataGuard } from '@src/guards/auth-data.guard';
+import { CurrentUser } from '@src/common/decorators/current-user.decorator'
+import { AuthDataGuard } from '@src/common/guards/auth-data.guard';
 
 
 @Controller('user')

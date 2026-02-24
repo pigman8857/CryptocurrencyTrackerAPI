@@ -1,4 +1,4 @@
-import { CreateCryptoDto } from '@src/crypto/dto/create-crypto.dto';
+import { CreateCryptoDto } from '@crypto/dto/create-crypto.dto';
 import { IsNumber,IsDateString, IsObject, ValidateNested} from 'class-validator';
 import { Type } from 'class-transformer';
 
